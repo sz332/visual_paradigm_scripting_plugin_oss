@@ -1,0 +1,28 @@
+<plugin
+        id="LangSupport"
+        description="3rd party language support for Visual Paradigm"
+        provider="zsolt.sandor@gmail.com"
+        class="hu.resanbt.visualparadigm.scripting.ScriptingPlugin">
+    <runtime>
+        <library path="lib/groovy-3.0.9.jar" relativePath="true"/>
+        <library path="lib/rsyntaxtextarea-3.1.4.jar" relativePath="true"/>
+        <library path="lib/commons-beanutils-1.9.4.jar" relativePath="true"/>
+        <library path="lib/opencsv-5.5.2.jar" relativePath="true"/>
+        <library path="lib/commons-collections-3.2.2.jar" relativePath="true"/>
+        <library path="lib/gson-2.8.9.jar" relativePath="true"/>
+        <library path="scripting-1.0.0.jar"/>
+    </runtime>
+    <actionSets>
+        <actionSet id="HelloActionSet">
+            <action
+                    id="ScriptEditorAction"
+                    actionType="generalAction"
+                    label="Script editor"
+                    tooltip="Open the script editor"
+                    menuPath="Plugins/#"
+                    toolbarPath="Plugins/#">
+                <actionController class="hu.resanbt.visualparadigm.scripting.ScriptEditorController"/>
+            </action>
+        </actionSet>
+    </actionSets>
+</plugin>
