@@ -4,6 +4,8 @@ This repository contains an open source scripting plugin for Visual Paradigm (ht
 
 # Features
 
+![image](https://user-images.githubusercontent.com/8182138/146509410-f6ea8cf3-055f-42e8-8e0f-e862e79c187a.png)
+
 * Groovy language support
 * Display result in text area
 * Display result in grid
