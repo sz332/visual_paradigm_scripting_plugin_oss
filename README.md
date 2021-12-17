@@ -2,6 +2,7 @@
 
 This repository contains an open source scripting plugin for Visual Paradigm (https://www.visual-paradigm.com). 
 
+# Features
 
 # Commercial support
 
