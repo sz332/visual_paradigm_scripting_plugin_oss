@@ -49,15 +49,18 @@ Stop Visual Paradigm, go to the location, and simply remove the `scripting-<vers
 
 # Usage
 
-
-## Saved history
-
-The history file is saved under
-`user-home-directory/.vp-scripting-plugin/history.json`
-as form of json scripts encoded with base64.
-
+* [General usage](docs/general.md)
+* [Groovy scripting](docs/groovy.md)
 
 # Building
+
+The following chapter describes how to build a plugin from the source code.
+
+## Requirements
+
+* JDK 11
+* Maven
+* Installed Visual Paradigm
 
 ## Configuration
 
