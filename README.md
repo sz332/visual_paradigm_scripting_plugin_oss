@@ -21,6 +21,12 @@ This repository contains an open source scripting plugin for Visual Paradigm (ht
 The plugin is developed on best-effort basis. The author is happy to provide commercial support including bugfixes or new features if needed.
 
 
+# Download
+
+The latest release of the plugin can be downloaded from:
+
+https://github.com/sz332/visual_paradigm_scripting_plugin_oss/releases
+
 # Installation
 
 To install the plugin start Visual Paradigm and in `Help -> Install plugin`
