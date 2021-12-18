@@ -6,6 +6,7 @@ import hu.resanbt.visualparadigm.scripting.common.history.HistoryComboBoxRendere
 import hu.resanbt.visualparadigm.scripting.common.history.HistoryLog;
 import hu.resanbt.visualparadigm.scripting.common.history.HistoryRecord;
 import hu.resanbt.visualparadigm.scripting.common.storage.LocalStorage;
+import hu.resanbt.visualparadigm.scripting.common.ui.KeyPressedForwarder;
 import hu.resanbt.visualparadigm.scripting.common.usecase.UseCase;
 import hu.resanbt.visualparadigm.scripting.event.*;
 import hu.resanbt.visualparadigm.scripting.script.GroovyScriptExecutor;
@@ -16,6 +17,8 @@ import org.fife.ui.rsyntaxtextarea.SyntaxConstants;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ItemEvent;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 
 @SuppressWarnings({"squid:S1068", "squid:S1948"})
 public class ScriptEditorPanel extends BaseScriptEditorPanel {
@@ -46,6 +49,7 @@ public class ScriptEditorPanel extends BaseScriptEditorPanel {
                 new DisplaySmartGridResultInTableUseCase(eventBus, this.outputTable),
                 new DisplayStringResultOnOutputTextUseCase(eventBus, this.outputTextArea),
                 new ExecuteSelectedScriptUseCase(eventBus, executor),
+                new FilterTableUseCase(eventBus, this.outputTable),
                 new FocusOnResultGridWhenRequestedUseCase(eventBus, this.resultTabbedPane),
                 new FocusOnResultTextAreaWhenRequestedUseCase(eventBus, this.resultTabbedPane),
                 new LoadHistoryOnDialogDisplayUseCase(eventBus, this.historyLog, this.historyComboBox),
@@ -66,11 +70,18 @@ public class ScriptEditorPanel extends BaseScriptEditorPanel {
 
         this.historyComboBox.setRenderer(new HistoryComboBoxRenderer());
 
+        this.tableFilterTextField.addKeyListener(new KeyPressedForwarder(this::filterTableCommand));
         this.historyComboBox.addItemListener(this::selectHistoryCommand);
         this.appendToHistoryButton.addActionListener(this::appendToHistoryCommand);
         this.closeButton.addActionListener(this::closeDialogCommand);
         this.executeButton.addActionListener(this::executeScriptCommand);
         this.exportButton.addActionListener(this::exportCsvCommand);
+    }
+
+    private void filterTableCommand(KeyEvent e){
+        if (e.getKeyCode() == KeyEvent.VK_ENTER){
+            eventBus.publish(new FilterRequestedEvent(tableFilterTextField.getText()));
+        }
     }
 
     @OnEventDispatcherThread

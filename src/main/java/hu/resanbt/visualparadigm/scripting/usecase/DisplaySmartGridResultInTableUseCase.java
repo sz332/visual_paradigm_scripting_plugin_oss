@@ -24,6 +24,7 @@ public class DisplaySmartGridResultInTableUseCase implements UseCase {
         eventBus.publish(new ResultGridFocusRequestedEvent());
 
         SwingUtilities.invokeLater(() -> {
+            this.table.setRowSorter(null);
             SmartTableModel model = new SmartTableModel(event.getSmartGridResult());
             this.table.setModel(model);
             model.fireTableDataChanged();
