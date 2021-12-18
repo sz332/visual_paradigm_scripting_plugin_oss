@@ -2,36 +2,28 @@ package hu.resanbt.visualparadigm.scripting.usecase;
 
 import hu.resanbt.visualparadigm.scripting.common.eventbus.EventBus;
 import hu.resanbt.visualparadigm.scripting.common.usecase.UseCase;
-import hu.resanbt.visualparadigm.scripting.event.FilterRequestedEvent;
+import hu.resanbt.visualparadigm.scripting.event.ClearFilterRequestedEvent;
 
 import javax.swing.*;
 import javax.swing.table.TableRowSorter;
 
-public class FilterTableUseCase implements UseCase {
+public class ClearFilterTableUseCase implements UseCase {
 
     private final EventBus eventBus;
     private final JTable table;
 
-    public FilterTableUseCase(EventBus eventBus, JTable table) {
+    public ClearFilterTableUseCase(EventBus eventBus, JTable table) {
         this.eventBus = eventBus;
         this.table = table;
 
-        eventBus.subscribe(FilterRequestedEvent.class, this::filterRequested);
+        eventBus.subscribe(ClearFilterRequestedEvent.class, this::clearFilterRequested);
     }
 
-    private void filterRequested(FilterRequestedEvent event) {
+    private void clearFilterRequested(ClearFilterRequestedEvent event) {
 
         SwingUtilities.invokeLater(() -> {
-
             var sorter = new TableRowSorter<>(table.getModel());
-
-                try {
-                    RowFilter rf = RowFilter.regexFilter(event.getFilter());
-                    sorter.setRowFilter(rf);
-                } catch (Exception e) {
-                    return;
-                }
-
+            sorter.setRowFilter(null);
             table.setRowSorter(sorter);
         });
     }

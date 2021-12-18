@@ -17,7 +17,6 @@ import org.fife.ui.rsyntaxtextarea.SyntaxConstants;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ItemEvent;
-import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 
 @SuppressWarnings({"squid:S1068", "squid:S1948"})
@@ -40,6 +39,7 @@ public class ScriptEditorPanel extends BaseScriptEditorPanel {
         useCases = new UseCase[]{
                 new AppendScriptToHistoryOnCloseUseCase(eventBus, this.historyLog, this.scriptTextArea),
                 new AppendScriptToHistoryUseCase(eventBus, this.historyLog, this.scriptTextArea),
+                new ClearFilterTableUseCase(eventBus, this.outputTable),
                 new CsvExportUseCase(eventBus),
                 new DisplayEmptyResultOnOutputUseCase(eventBus, this.outputTextArea),
                 new DisplayExceptionOnOutputUseCase(eventBus, this.outputTextArea),
@@ -80,7 +80,12 @@ public class ScriptEditorPanel extends BaseScriptEditorPanel {
 
     private void filterTableCommand(KeyEvent e){
         if (e.getKeyCode() == KeyEvent.VK_ENTER){
-            eventBus.publish(new FilterRequestedEvent(tableFilterTextField.getText()));
+
+            if (tableFilterTextField.getText().equals("")){
+                eventBus.publish(new ClearFilterRequestedEvent());
+            } else {
+                eventBus.publish(new FilterRequestedEvent(tableFilterTextField.getText()));
+            }
         }
     }
 
