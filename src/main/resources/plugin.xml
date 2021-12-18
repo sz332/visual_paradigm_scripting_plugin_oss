@@ -10,7 +10,7 @@
         <library path="lib/opencsv-5.5.2.jar" relativePath="true"/>
         <library path="lib/commons-collections-3.2.2.jar" relativePath="true"/>
         <library path="lib/gson-2.8.9.jar" relativePath="true"/>
-        <library path="scripting-1.0.0.jar"/>
+        <library path="scripting-1.0.1.jar"/>
     </runtime>
     <actionSets>
         <actionSet id="HelloActionSet">
