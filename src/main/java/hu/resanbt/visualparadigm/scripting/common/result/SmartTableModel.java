@@ -3,6 +3,7 @@ package hu.resanbt.visualparadigm.scripting.common.result;
 import hu.resanbt.visualparadigm.scripting.common.reflection.Bean;
 
 import javax.swing.table.AbstractTableModel;
+import javax.swing.table.DefaultTableModel;
 
 @SuppressWarnings("squid:S1948")
 public class SmartTableModel extends AbstractTableModel {
@@ -28,6 +29,17 @@ public class SmartTableModel extends AbstractTableModel {
     public String getColumnName(int column) {
         String field = grid.getFields().keySet().toArray(new String[0])[column];
         return grid.getFields().get(field);
+    }
+
+    @Override
+    public Class<?> getColumnClass(int columnIndex) {
+        Class returnValue;
+        if((columnIndex >= 0) && (columnIndex < getColumnCount())) {
+            returnValue = getValueAt(0, columnIndex).getClass();
+        } else {
+            returnValue = Object.class;
+        }
+        return returnValue;
     }
 
     @Override

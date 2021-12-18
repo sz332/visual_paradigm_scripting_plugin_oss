@@ -24,6 +24,7 @@ public class DisplayListResultInTableUseCase implements UseCase {
         eventBus.publish(new ResultGridFocusRequestedEvent());
 
         SwingUtilities.invokeLater(() -> {
+            this.table.setRowSorter(null);
             SimpleListTableModel model = new SimpleListTableModel(event.getList());
             this.table.setModel(model);
             model.fireTableDataChanged();
