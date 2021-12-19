@@ -12,6 +12,11 @@ import java.util.Optional;
 public class JythonScriptExecutor implements ScriptExecutor {
 
     @Override
+    public String getLanguage() {
+        return "Python";
+    }
+
+    @Override
     public Object execute(String script) throws ScriptExecutionException {
 
         try {

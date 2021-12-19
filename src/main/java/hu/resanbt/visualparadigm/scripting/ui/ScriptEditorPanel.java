@@ -10,6 +10,7 @@ import hu.resanbt.visualparadigm.scripting.common.ui.KeyPressedForwarder;
 import hu.resanbt.visualparadigm.scripting.common.usecase.UseCase;
 import hu.resanbt.visualparadigm.scripting.event.*;
 import hu.resanbt.visualparadigm.scripting.script.GroovyScriptExecutor;
+import hu.resanbt.visualparadigm.scripting.script.JythonScriptExecutor;
 import hu.resanbt.visualparadigm.scripting.script.ScriptExecutor;
 import hu.resanbt.visualparadigm.scripting.usecase.*;
 import org.fife.ui.rsyntaxtextarea.SyntaxConstants;
@@ -18,12 +19,14 @@ import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ItemEvent;
 import java.awt.event.KeyEvent;
+import java.util.Arrays;
+import java.util.List;
 
 @SuppressWarnings({"squid:S1068", "squid:S1948"})
 public class ScriptEditorPanel extends BaseScriptEditorPanel {
 
     private final EventBus eventBus;
-    private final ScriptExecutor executor;
+    private final List<ScriptExecutor> executors;
     private final HistoryLog historyLog;
 
     private final UseCase[] useCases;
@@ -31,8 +34,8 @@ public class ScriptEditorPanel extends BaseScriptEditorPanel {
     public ScriptEditorPanel(EventBus eventBus) {
         super();
         this.eventBus = eventBus;
-        this.executor = new GroovyScriptExecutor();
         this.historyLog = new HistoryLog(eventBus, new LocalStorage());
+        this.executors = Arrays.asList(new GroovyScriptExecutor(), new JythonScriptExecutor());
 
         this.updateComponents();
 
@@ -48,7 +51,7 @@ public class ScriptEditorPanel extends BaseScriptEditorPanel {
                 new DisplaySelectedHistoryRecordInEditorUseCase(eventBus, this.scriptTextArea),
                 new DisplayTabularResultInTableUseCase(eventBus, this.outputTable),
                 new DisplayStringResultInOutputTextAreaUseCase(eventBus, this.outputTextArea),
-                new ExecuteSelectedScriptUseCase(eventBus, executor),
+                new ExecuteSelectedScriptUseCase(eventBus, executors),
                 new FilterTableUseCase(eventBus, this.outputTable),
                 new FocusOnResultGridWhenRequestedUseCase(eventBus, this.resultTabbedPane),
                 new FocusOnResultTextAreaWhenRequestedUseCase(eventBus, this.resultTabbedPane),
@@ -67,6 +70,10 @@ public class ScriptEditorPanel extends BaseScriptEditorPanel {
         this.scriptTextArea.setAntiAliasingEnabled(true);
 
         this.scriptTextScrollPane.setLineNumbersEnabled(true);
+
+        for (var executor : this.executors){
+            this.languageComboBox.addItem(executor.getLanguage());
+        }
 
         this.historyComboBox.setRenderer(new HistoryComboBoxRenderer());
 
@@ -108,7 +115,7 @@ public class ScriptEditorPanel extends BaseScriptEditorPanel {
 
     @OnEventDispatcherThread
     private void executeScriptCommand(ActionEvent e) {
-        eventBus.publish(new ScriptExecutionRequestedEvent(scriptTextArea.getText()));
+        eventBus.publish(new ScriptExecutionRequestedEvent(languageComboBox.getSelectedItem().toString(),scriptTextArea.getText()));
     }
 
     @OnEventDispatcherThread

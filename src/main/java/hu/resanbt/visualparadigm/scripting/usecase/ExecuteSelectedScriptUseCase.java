@@ -6,22 +6,34 @@ import hu.resanbt.visualparadigm.scripting.common.result.ListResult;
 import hu.resanbt.visualparadigm.scripting.common.result.TabularResult;
 import hu.resanbt.visualparadigm.scripting.common.usecase.UseCase;
 import hu.resanbt.visualparadigm.scripting.event.*;
+import hu.resanbt.visualparadigm.scripting.script.ExecutorNotFoundException;
 import hu.resanbt.visualparadigm.scripting.script.ScriptExecutionException;
 import hu.resanbt.visualparadigm.scripting.script.ScriptExecutor;
+
+import java.util.List;
 
 public class ExecuteSelectedScriptUseCase implements UseCase {
 
     private final EventBus eventBus;
-    private final ScriptExecutor executor;
+    private final List<ScriptExecutor> executors;
 
-    public ExecuteSelectedScriptUseCase(EventBus eventBus, ScriptExecutor executor) {
+    public ExecuteSelectedScriptUseCase(EventBus eventBus, List<ScriptExecutor> executors) {
         this.eventBus = eventBus;
-        this.executor = executor;
+        this.executors = executors;
         eventBus.subscribe(ScriptExecutionRequestedEvent.class, this::onScriptExecutionRequested);
     }
 
     private void onScriptExecutionRequested(ScriptExecutionRequestedEvent event) {
         try {
+
+            String language = event.getLanguage();
+
+            ScriptExecutor executor = executors
+                    .stream()
+                    .filter(e -> e.getLanguage().equals(event.getLanguage()))
+                    .findFirst()
+                    .orElseThrow(ExecutorNotFoundException::new);
+
             Object value = executor.execute(event.getScript());
 
             if (value == null) {
@@ -38,6 +50,8 @@ public class ExecuteSelectedScriptUseCase implements UseCase {
 
         } catch (ScriptExecutionException e) {
             eventBus.publish(new ScriptExecutionFailedEvent(e));
+        } catch (ExecutorNotFoundException e){
+            eventBus.publish(new ExecutorNotFoundEvent(e));
         } catch (Exception e) {
             eventBus.publish(new ExceptionOccurredEvent(e));
         }

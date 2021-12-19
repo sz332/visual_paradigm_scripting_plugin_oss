@@ -4,4 +4,6 @@ public interface ScriptExecutor {
 
     Object execute(String script) throws ScriptExecutionException;
 
+    String getLanguage();
+
 }

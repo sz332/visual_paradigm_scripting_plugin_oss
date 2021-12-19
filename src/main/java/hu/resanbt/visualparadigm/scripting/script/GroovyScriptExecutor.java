@@ -15,6 +15,11 @@ public class GroovyScriptExecutor implements ScriptExecutor {
     private static final String TEMP_FILENAME = "Script1.groovy";
 
     @Override
+    public String getLanguage() {
+        return "Groovy";
+    }
+
+    @Override
     public Object execute(String script) throws ScriptExecutionException {
 
         var binding = new Binding();
