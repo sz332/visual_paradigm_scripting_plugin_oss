@@ -1,7 +1,7 @@
 package hu.resanbt.visualparadigm.scripting.common.csv;
 
 import hu.resanbt.visualparadigm.scripting.common.reflection.Bean;
-import hu.resanbt.visualparadigm.scripting.common.result.SmartGridResult;
+import hu.resanbt.visualparadigm.scripting.common.result.TabularResult;
 
 import java.util.Arrays;
 import java.util.List;
@@ -11,9 +11,9 @@ import java.util.stream.Stream;
 @SuppressWarnings("squid:S3878")
 public class CsvData {
 
-    private final SmartGridResult grid;
+    private final TabularResult grid;
 
-    public CsvData(SmartGridResult grid) {
+    public CsvData(TabularResult grid) {
         this.grid = grid;
     }
 

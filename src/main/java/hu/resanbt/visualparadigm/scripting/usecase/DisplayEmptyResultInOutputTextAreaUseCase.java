@@ -7,12 +7,12 @@ import hu.resanbt.visualparadigm.scripting.event.ResultTextareaFocusRequestedEve
 
 import javax.swing.*;
 
-public class DisplayEmptyResultOnOutputUseCase implements UseCase {
+public class DisplayEmptyResultInOutputTextAreaUseCase implements UseCase {
 
     private final EventBus eventBus;
     private final JTextArea textArea;
 
-    public DisplayEmptyResultOnOutputUseCase(EventBus eventBus, JTextArea textArea) {
+    public DisplayEmptyResultInOutputTextAreaUseCase(EventBus eventBus, JTextArea textArea) {
         this.eventBus = eventBus;
         this.textArea = textArea;
         eventBus.subscribe(EmptyResultCreatedEvent.class, this::onEmptyResultCreated);

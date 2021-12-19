@@ -2,8 +2,8 @@ package hu.resanbt.visualparadigm.scripting.usecase;
 
 import hu.resanbt.visualparadigm.scripting.common.eventbus.EventBus;
 import hu.resanbt.visualparadigm.scripting.common.result.CastedList;
-import hu.resanbt.visualparadigm.scripting.common.result.SmartCollectionResult;
-import hu.resanbt.visualparadigm.scripting.common.result.SmartGridResult;
+import hu.resanbt.visualparadigm.scripting.common.result.ListResult;
+import hu.resanbt.visualparadigm.scripting.common.result.TabularResult;
 import hu.resanbt.visualparadigm.scripting.common.usecase.UseCase;
 import hu.resanbt.visualparadigm.scripting.event.*;
 import hu.resanbt.visualparadigm.scripting.script.ScriptExecutionException;
@@ -26,10 +26,10 @@ public class ExecuteSelectedScriptUseCase implements UseCase {
 
             if (value == null) {
                 eventBus.publish(new EmptyResultCreatedEvent());
-            } else if (value instanceof SmartCollectionResult) {
-                eventBus.publish(new SmartCollectionResultCreatedEvent((SmartCollectionResult) value));
-            } else if (value instanceof SmartGridResult) {
-                eventBus.publish(new SmartGridResultCreatedEvent((SmartGridResult) value));
+            } else if (value instanceof ListResult) {
+                eventBus.publish(new ListResultCreatedEvent(((ListResult) value).asList()));
+            } else if (value instanceof TabularResult) {
+                eventBus.publish(new TabularResultCreatedEvent((TabularResult) value));
             } else if (value instanceof Iterable || isArray(value)) {
                 CastedList.of(value).ifPresent(list -> eventBus.publish(new ListResultCreatedEvent(list.asList())));
             } else {

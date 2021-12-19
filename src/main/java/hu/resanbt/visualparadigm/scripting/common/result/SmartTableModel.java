@@ -3,14 +3,13 @@ package hu.resanbt.visualparadigm.scripting.common.result;
 import hu.resanbt.visualparadigm.scripting.common.reflection.Bean;
 
 import javax.swing.table.AbstractTableModel;
-import javax.swing.table.DefaultTableModel;
 
 @SuppressWarnings("squid:S1948")
 public class SmartTableModel extends AbstractTableModel {
 
-    private final SmartGridResult grid;
+    private final TabularResult grid;
 
-    public SmartTableModel(SmartGridResult grid) {
+    public SmartTableModel(TabularResult grid) {
         super();
         this.grid = grid;
     }
@@ -33,8 +32,8 @@ public class SmartTableModel extends AbstractTableModel {
 
     @Override
     public Class<?> getColumnClass(int columnIndex) {
-        Class returnValue;
-        if((columnIndex >= 0) && (columnIndex < getColumnCount())) {
+        Class<?> returnValue;
+        if ((columnIndex >= 0) && (columnIndex < getColumnCount())) {
             returnValue = getValueAt(0, columnIndex).getClass();
         } else {
             returnValue = Object.class;
