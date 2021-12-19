@@ -4,22 +4,22 @@ import hu.resanbt.visualparadigm.scripting.common.eventbus.EventBus;
 import hu.resanbt.visualparadigm.scripting.common.result.SmartTableModel;
 import hu.resanbt.visualparadigm.scripting.common.usecase.UseCase;
 import hu.resanbt.visualparadigm.scripting.event.ResultGridFocusRequestedEvent;
-import hu.resanbt.visualparadigm.scripting.event.SmartGridResultCreatedEvent;
+import hu.resanbt.visualparadigm.scripting.event.TabularResultCreatedEvent;
 
 import javax.swing.*;
 
-public class DisplaySmartGridResultInTableUseCase implements UseCase {
+public class DisplayTabularResultInTableUseCase implements UseCase {
 
     private final EventBus eventBus;
     private final JTable table;
 
-    public DisplaySmartGridResultInTableUseCase(EventBus eventBus, JTable table) {
+    public DisplayTabularResultInTableUseCase(EventBus eventBus, JTable table) {
         this.eventBus = eventBus;
         this.table = table;
-        eventBus.subscribe(SmartGridResultCreatedEvent.class, this::onSmartGridResultCreated);
+        eventBus.subscribe(TabularResultCreatedEvent.class, this::onTabularResultCreated);
     }
 
-    private void onSmartGridResultCreated(SmartGridResultCreatedEvent event) {
+    private void onTabularResultCreated(TabularResultCreatedEvent event) {
 
         eventBus.publish(new ResultGridFocusRequestedEvent());
 

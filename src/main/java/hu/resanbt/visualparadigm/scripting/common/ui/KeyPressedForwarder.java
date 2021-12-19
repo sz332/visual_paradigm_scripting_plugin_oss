@@ -8,7 +8,7 @@ public class KeyPressedForwarder extends KeyAdapter {
 
     private final Consumer<KeyEvent> consumer;
 
-    public KeyPressedForwarder(Consumer<KeyEvent> consumer){
+    public KeyPressedForwarder(Consumer<KeyEvent> consumer) {
         this.consumer = consumer;
     }
 

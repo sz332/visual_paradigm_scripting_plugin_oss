@@ -1,11 +1,10 @@
 package hu.resanbt.visualparadigm.scripting.vp;
 
-import com.vp.plugin.model.IModelElement;
 import hu.resanbt.visualparadigm.scripting.common.result.CastedList;
-import hu.resanbt.visualparadigm.scripting.common.result.SmartCollectionResult;
-import hu.resanbt.visualparadigm.scripting.common.result.SmartGridResult;
+import hu.resanbt.visualparadigm.scripting.common.result.ListResult;
+import hu.resanbt.visualparadigm.scripting.common.result.TabularResult;
 
-import java.util.Collection;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -35,16 +34,16 @@ public class ModelHelper {
      * @param elements
      * @return
      */
-    public SmartCollectionResult asSmartCollection(Collection<IModelElement> elements) {
-        return new SmartCollectionResult(elements);
+    public ListResult asListResult(List<Object> elements) {
+        return new ListResult(elements);
     }
 
     /**
      * @param array
      * @return
      */
-    public SmartCollectionResult asSmartCollection(IModelElement[] array) {
-        return new SmartCollectionResult(array);
+    public ListResult asListResult(Object[] array) {
+        return new ListResult(array);
     }
 
     /**
@@ -52,8 +51,9 @@ public class ModelHelper {
      * @param fields
      * @return
      */
-    public SmartGridResult asSmartGrid(Object list, Map<String, String> fields) {
-        return new SmartGridResult(CastedList.of(list).orElseThrow(NullPointerException::new).asList(), fields);
+    public TabularResult asTabularResult(Object list, Map<String, String> fields) {
+        return new TabularResult(CastedList.of(list).orElseThrow(NullPointerException::new).asList(), fields);
     }
+
 
 }

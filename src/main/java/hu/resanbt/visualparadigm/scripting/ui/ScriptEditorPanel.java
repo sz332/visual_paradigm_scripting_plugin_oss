@@ -41,20 +41,20 @@ public class ScriptEditorPanel extends BaseScriptEditorPanel {
                 new AppendScriptToHistoryUseCase(eventBus, this.historyLog, this.scriptTextArea),
                 new ClearFilterTableUseCase(eventBus, this.outputTable),
                 new CsvExportUseCase(eventBus),
-                new DisplayEmptyResultOnOutputUseCase(eventBus, this.outputTextArea),
-                new DisplayExceptionOnOutputUseCase(eventBus, this.outputTextArea),
+                new DisplayEmptyResultInOutputTextAreaUseCase(eventBus, this.outputTextArea),
+                new DisplayExceptionInOutputTextAreaUseCase(eventBus, this.outputTextArea),
                 new DisplayListResultInTableUseCase(eventBus, this.outputTable),
-                new DisplayScriptExecutionFailedOnOutputUseCase(eventBus, this.outputTextArea),
+                new DisplayScriptExecutionFailedInOutputTextAreaUseCase(eventBus, this.outputTextArea),
                 new DisplaySelectedHistoryRecordInEditorUseCase(eventBus, this.scriptTextArea),
-                new DisplaySmartGridResultInTableUseCase(eventBus, this.outputTable),
-                new DisplayStringResultOnOutputTextUseCase(eventBus, this.outputTextArea),
+                new DisplayTabularResultInTableUseCase(eventBus, this.outputTable),
+                new DisplayStringResultInOutputTextAreaUseCase(eventBus, this.outputTextArea),
                 new ExecuteSelectedScriptUseCase(eventBus, executor),
                 new FilterTableUseCase(eventBus, this.outputTable),
                 new FocusOnResultGridWhenRequestedUseCase(eventBus, this.resultTabbedPane),
                 new FocusOnResultTextAreaWhenRequestedUseCase(eventBus, this.resultTabbedPane),
                 new LoadHistoryOnDialogDisplayUseCase(eventBus, this.historyLog, this.historyComboBox),
                 new RefreshHistoryOnHistoryChangeUseCase(eventBus, this.historyLog, this.historyComboBox),
-                new SelectErroneousLineUseCase(eventBus, this.scriptTextArea)};
+                new SelectErroneousLineInEditorUseCase(eventBus, this.scriptTextArea)};
 
         eventBus.publish(new DialogDisplayedEvent());
     }
@@ -78,10 +78,10 @@ public class ScriptEditorPanel extends BaseScriptEditorPanel {
         this.exportButton.addActionListener(this::exportCsvCommand);
     }
 
-    private void filterTableCommand(KeyEvent e){
-        if (e.getKeyCode() == KeyEvent.VK_ENTER){
+    private void filterTableCommand(KeyEvent e) {
+        if (e.getKeyCode() == KeyEvent.VK_ENTER) {
 
-            if (tableFilterTextField.getText().equals("")){
+            if (tableFilterTextField.getText().equals("")) {
                 eventBus.publish(new ClearFilterRequestedEvent());
             } else {
                 eventBus.publish(new FilterRequestedEvent(tableFilterTextField.getText()));

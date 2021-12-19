@@ -9,13 +9,10 @@ import javax.swing.table.TableRowSorter;
 
 public class ClearFilterTableUseCase implements UseCase {
 
-    private final EventBus eventBus;
     private final JTable table;
 
     public ClearFilterTableUseCase(EventBus eventBus, JTable table) {
-        this.eventBus = eventBus;
         this.table = table;
-
         eventBus.subscribe(ClearFilterRequestedEvent.class, this::clearFilterRequested);
     }
 

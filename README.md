@@ -1,6 +1,6 @@
 # Script plugin for Visual Paradigm
 
-This repository contains an open source scripting plugin for Visual Paradigm (https://www.visual-paradigm.com). 
+This repository contains an open source scripting plugin for Visual Paradigm (https://www.visual-paradigm.com).
 
 # Features
 
@@ -16,11 +16,10 @@ This repository contains an open source scripting plugin for Visual Paradigm (ht
 * History support
 * Filter result
 
-
 # Commercial support
 
-The plugin is developed on best-effort basis. The author is happy to provide commercial support including bugfixes or new features if needed.
-
+The plugin is developed on best-effort basis. The author is happy to provide commercial support including bugfixes or
+new features if needed.
 
 # Download
 
@@ -31,16 +30,15 @@ https://github.com/sz332/visual_paradigm_scripting_plugin_oss/releases
 # Installation
 
 To install the plugin start Visual Paradigm and in `Help -> Install plugin`
-select `Install from a zip of plugin` and selected the zip file either 
-downloaded from the repository or in case of local build from the `target` 
+select `Install from a zip of plugin` and selected the zip file either downloaded from the repository or in case of
+local build from the `target`
 folder.
 
 Visual Paradigm will ask for a restart.
 
 # Uninstallation
 
-To remove the plugin go to `Help->Install Plugin...` and Visual Paradigm
-will provide you the plugin location.
+To remove the plugin go to `Help->Install Plugin...` and Visual Paradigm will provide you the plugin location.
 
 In case of Windows, this is:
 
@@ -65,15 +63,12 @@ The following chapter describes how to build a plugin from the source code.
 
 ## Configuration
 
-The build system uses the openapi library of Visual Paradigm therefore 
-the location of Visual Paradigm  installation shall be configured 
-in `pom.xml` file in the `properties` section under the 
-property `visualparadigm.app.dir`.
+The build system uses the openapi library of Visual Paradigm therefore the location of Visual Paradigm installation
+shall be configured in `pom.xml` file in the `properties` section under the property `visualparadigm.app.dir`.
 
 Example:
 
 `<visualparadigm.app.dir>d:/Visual Paradigm</visualparadigm.app.dir>`
-
 
 ## Building
 

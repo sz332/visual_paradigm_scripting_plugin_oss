@@ -3,11 +3,11 @@ package hu.resanbt.visualparadigm.scripting.usecase;
 import com.opencsv.CSVWriterBuilder;
 import hu.resanbt.visualparadigm.scripting.common.csv.CsvData;
 import hu.resanbt.visualparadigm.scripting.common.eventbus.EventBus;
-import hu.resanbt.visualparadigm.scripting.common.result.SmartGridResult;
+import hu.resanbt.visualparadigm.scripting.common.result.TabularResult;
 import hu.resanbt.visualparadigm.scripting.common.usecase.UseCase;
 import hu.resanbt.visualparadigm.scripting.event.ExceptionOccurredEvent;
 import hu.resanbt.visualparadigm.scripting.event.ExportFileSelectedEvent;
-import hu.resanbt.visualparadigm.scripting.event.SmartGridResultCreatedEvent;
+import hu.resanbt.visualparadigm.scripting.event.TabularResultCreatedEvent;
 
 import java.io.FileWriter;
 import java.io.IOException;
@@ -17,15 +17,15 @@ public class CsvExportUseCase implements UseCase {
 
     private final EventBus eventBus;
 
-    private Optional<SmartGridResult> smartGridResult = Optional.empty();
+    private Optional<TabularResult> smartGridResult = Optional.empty();
 
     public CsvExportUseCase(EventBus eventBus) {
         this.eventBus = eventBus;
-        eventBus.subscribe(SmartGridResultCreatedEvent.class, this::onSmartGridResultCreated);
+        eventBus.subscribe(TabularResultCreatedEvent.class, this::onSmartGridResultCreated);
         eventBus.subscribe(ExportFileSelectedEvent.class, this::onExportFileSelect);
     }
 
-    public void onSmartGridResultCreated(SmartGridResultCreatedEvent event) {
+    public void onSmartGridResultCreated(TabularResultCreatedEvent event) {
         this.smartGridResult = Optional.of(event.getSmartGridResult());
     }
 

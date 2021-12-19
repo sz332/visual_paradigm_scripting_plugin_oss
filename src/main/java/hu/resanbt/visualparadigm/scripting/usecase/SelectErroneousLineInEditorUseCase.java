@@ -9,12 +9,12 @@ import org.fife.ui.rsyntaxtextarea.RSyntaxTextArea;
 import javax.swing.*;
 import javax.swing.text.BadLocationException;
 
-public class SelectErroneousLineUseCase implements UseCase {
+public class SelectErroneousLineInEditorUseCase implements UseCase {
 
     private final EventBus eventBus;
     private final RSyntaxTextArea textArea;
 
-    public SelectErroneousLineUseCase(EventBus eventBus, RSyntaxTextArea textArea) {
+    public SelectErroneousLineInEditorUseCase(EventBus eventBus, RSyntaxTextArea textArea) {
         this.eventBus = eventBus;
         this.textArea = textArea;
         eventBus.subscribe(ScriptExecutionFailedEvent.class, this::onScriptExecutionFailed);

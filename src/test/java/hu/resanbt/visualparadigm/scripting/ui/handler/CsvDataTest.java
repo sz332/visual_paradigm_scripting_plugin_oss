@@ -1,7 +1,7 @@
 package hu.resanbt.visualparadigm.scripting.ui.handler;
 
 import hu.resanbt.visualparadigm.scripting.common.csv.CsvData;
-import hu.resanbt.visualparadigm.scripting.common.result.SmartGridResult;
+import hu.resanbt.visualparadigm.scripting.common.result.TabularResult;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -21,7 +21,7 @@ public class CsvDataTest {
         properties.put("name", "Name");
         properties.put("id", "Id");
 
-        SmartGridResult grid = new SmartGridResult(createTestData(), properties);
+        TabularResult grid = new TabularResult(createTestData(), properties);
         CsvData csvData = new CsvData(grid);
 
         var rawData = csvData.asRawData();
