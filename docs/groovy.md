@@ -34,7 +34,7 @@ import com.vp.plugin.model.factory.IModelElementFactory
 def projectManager = appManager.getProjectManager()
 def elements = projectManager.project.toAllLevelModelElementArray()
 
-return modelHelper.asSmartGrid(
+return modelHelper.asTabularResult(
 	elements,
 	[id: "Id", name:"Name"]
 )
@@ -82,7 +82,7 @@ This will display a table with a single column with the provided values.
 
 ## Return data in tabular format
 
-If data is to be returned as a grid use `modelHelper.asSmartGrid(Object list, Map<String, String> fields)`
+If data is to be returned as a grid use `modelHelper.asTabularResult(Object list, Map<String, String> fields)`
 helper function.
 
 ### List
@@ -116,7 +116,7 @@ elements << myClass
 
 // return the list of object as a tabular data
 
-return modelHelper.asSmartGrid(
+return modelHelper.asTabularResult(
     elements,
     [id: "Id", name: "Name"]
 )
