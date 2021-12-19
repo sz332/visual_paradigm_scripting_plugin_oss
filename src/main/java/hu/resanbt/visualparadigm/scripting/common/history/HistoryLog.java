@@ -39,7 +39,7 @@ public class HistoryLog {
         return retValue;
     }
 
-    public void append(String script) {
+    public void append(String language, String script) {
         String base64EncodedScript = Base64.getEncoder().withoutPadding().encodeToString(script.getBytes(StandardCharsets.UTF_8));
 
         File file = localStorage.getOrCreate(HISTORY_JSON);
@@ -53,7 +53,7 @@ public class HistoryLog {
                 list.addAll(Arrays.asList(gson.fromJson(new JsonReader(new FileReader(file)), HistoryRecord[].class)));
             }
 
-            list.add(new HistoryRecord("groovy", base64EncodedScript));
+            list.add(new HistoryRecord(language, base64EncodedScript));
 
             try (var fileWriter = new FileWriter(file)) {
                 gson.toJson(list, fileWriter);

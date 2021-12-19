@@ -40,15 +40,15 @@ public class ScriptEditorPanel extends BaseScriptEditorPanel {
         this.updateComponents();
 
         useCases = new UseCase[]{
-                new AppendScriptToHistoryOnCloseUseCase(eventBus, this.historyLog, this.scriptTextArea),
-                new AppendScriptToHistoryUseCase(eventBus, this.historyLog, this.scriptTextArea),
+                new AppendScriptToHistoryOnCloseUseCase(eventBus, this.historyLog, this.languageComboBox, this.scriptTextArea),
+                new AppendScriptToHistoryUseCase(eventBus, this.historyLog, this.languageComboBox, this.scriptTextArea),
                 new ClearFilterTableUseCase(eventBus, this.outputTable),
                 new CsvExportUseCase(eventBus),
                 new DisplayEmptyResultInOutputTextAreaUseCase(eventBus, this.outputTextArea),
                 new DisplayExceptionInOutputTextAreaUseCase(eventBus, this.outputTextArea),
                 new DisplayListResultInTableUseCase(eventBus, this.outputTable),
                 new DisplayScriptExecutionFailedInOutputTextAreaUseCase(eventBus, this.outputTextArea),
-                new DisplaySelectedHistoryRecordInEditorUseCase(eventBus, this.scriptTextArea),
+                new DisplaySelectedHistoryRecordInEditorUseCase(eventBus, this.languageComboBox, this.scriptTextArea),
                 new DisplayTabularResultInTableUseCase(eventBus, this.outputTable),
                 new DisplayStringResultInOutputTextAreaUseCase(eventBus, this.outputTextArea),
                 new ExecuteSelectedScriptUseCase(eventBus, executors),
