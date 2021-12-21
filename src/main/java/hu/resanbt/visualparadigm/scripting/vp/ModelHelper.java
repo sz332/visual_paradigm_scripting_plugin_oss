@@ -50,6 +50,8 @@ public class ModelHelper {
      * @param list
      * @param fields
      * @return
+     *
+     * FIXME replace null pointer exception with something else
      */
     public TabularResult asTabularResult(Object list, Map<String, String> fields) {
         return new TabularResult(CastedList.of(list).orElseThrow(NullPointerException::new).asList(), fields);

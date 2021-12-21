@@ -95,12 +95,12 @@
             <version>${hamcrest-all.version}</version>
             <scope>test</scope>
         </dependency>
-        <dependency>
+        <!--<dependency>
             <groupId>com.athaydes.automaton</groupId>
             <artifactId>Automaton</artifactId>
             <version>${automaton.version}</version>
             <scope>test</scope>
-        </dependency>
+        </dependency>-->
         <dependency>
             <groupId>org.codehaus.groovy</groupId>
             <artifactId>groovy-all</artifactId>

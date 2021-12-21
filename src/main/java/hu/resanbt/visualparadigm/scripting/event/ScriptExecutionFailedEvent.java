@@ -16,7 +16,7 @@ public class ScriptExecutionFailedEvent implements Event {
     }
 
     public String getMessage() {
-        return exception.getMessage();
+        return exception.getErrorMessage();
     }
 
 }

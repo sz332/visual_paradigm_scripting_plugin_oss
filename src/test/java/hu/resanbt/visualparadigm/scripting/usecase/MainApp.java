@@ -3,7 +3,6 @@ package hu.resanbt.visualparadigm.scripting.usecase;
 import hu.resanbt.visualparadigm.scripting.ui.ScriptEditorDialog;
 
 import javax.swing.*;
-import java.lang.reflect.InvocationTargetException;
 
 public class MainApp {
 
@@ -27,12 +26,12 @@ public class MainApp {
                 dialog.setVisible(true);
             });
 
-        } catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
-    public ScriptEditorDialog getDialog(){
+    public ScriptEditorDialog getDialog() {
         return dialog;
     }
 

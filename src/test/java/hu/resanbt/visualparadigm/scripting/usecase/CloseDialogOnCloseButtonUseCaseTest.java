@@ -1,6 +1,6 @@
 package hu.resanbt.visualparadigm.scripting.usecase;
 
-import com.athaydes.automaton.Swinger;
+//import com.athaydes.automaton.Swinger;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -10,7 +10,7 @@ import org.junit.Test;
  */
 public class CloseDialogOnCloseButtonUseCaseTest {
 
-    Swinger swinger;
+    //Swinger swinger;
     MainApp myApp;
 
     @Before
@@ -18,7 +18,7 @@ public class CloseDialogOnCloseButtonUseCaseTest {
         myApp = new MainApp();
         myApp.start();
 
-        swinger = Swinger.forSwingWindow();
+        //swinger = Swinger.forSwingWindow();
     }
 
     @After
@@ -29,7 +29,7 @@ public class CloseDialogOnCloseButtonUseCaseTest {
     @Test
     public void testFeature() {
 
-        swinger.clickOn("closeButton");
+        //swinger.clickOn("closeButton");
 
         //swinger.clickOn( "closeButton" );
 

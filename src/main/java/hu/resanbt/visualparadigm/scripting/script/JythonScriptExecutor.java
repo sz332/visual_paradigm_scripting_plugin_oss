@@ -1,6 +1,8 @@
 package hu.resanbt.visualparadigm.scripting.script;
 
 import com.vp.plugin.ApplicationManager;
+import hu.resanbt.visualparadigm.scripting.common.result.ListResult;
+import hu.resanbt.visualparadigm.scripting.common.result.TabularResult;
 import hu.resanbt.visualparadigm.scripting.vp.ModelHelper;
 import org.python.core.*;
 import org.python.util.PythonInterpreter;
@@ -26,64 +28,66 @@ public class JythonScriptExecutor implements ScriptExecutor {
             interpreter.set("model_helper", new ModelHelper());
             interpreter.exec(script);
 
-            PyObject result = interpreter.get("result");
+            var result = interpreter.get("result");
 
             if (result == null) {
                 return null;
             }
 
-            var p2j = pythonToJava(result);
+            // FIXME make it readable
+            var p2j = pythonBaseTypeToJava(result);
 
             if (p2j.isPresent()){
                 return p2j.get();
+            } else if (result instanceof PyObjectDerived){
+                return pythonObjectDerivedToJava((PyObjectDerived) result);
+            } else if (result instanceof PyList) {
+                return pythonListToJava((PyList) result);
+            } else {
+                return result;
             }
-
-            if (result instanceof PyList) {
-                PyList list = (PyList) result;
-
-                var retValue = new ArrayList<>();
-
-                for (PyObject o : list.getArray()) {
-                    pythonToJava(o).ifPresent(retValue::add);
-                }
-
-                return retValue;
-            }
-
-            return result;
 
         } catch (Exception e) {
-            throw new ScriptExecutionException(e, -1);
+            throw new JythonScriptExecutionException(e);
         }
     }
 
-    private Optional<Object> pythonToJava(Object o){
+    private Object pythonObjectDerivedToJava(PyObjectDerived derived){
+        var pythonResult = derived.__tojava__(Object.class);
+
+        if (pythonResult instanceof ListResult || pythonResult instanceof  TabularResult){
+            return pythonResult;
+        }
+
+        return "Result type: " + pythonResult.getClass() + " not supported";
+    }
+
+    private List<Object> pythonListToJava(PyList list){
+
+        var retValue = new ArrayList<>();
+
+        for (PyObject o : list.getArray()) {
+            pythonBaseTypeToJava(o).ifPresent(retValue::add);
+        }
+
+        return retValue;
+    }
+
+    private Optional<Object> pythonBaseTypeToJava(Object o){
 
         if (o instanceof PyInteger) {
-            return Optional.of(asInteger(o));
+            return Optional.of(((PyInteger) o).getValue());
         }
 
         if (o instanceof PyString) {
-            return Optional.of(asString(o));
+            return Optional.of(((PyString) o).getString());
         }
 
         if (o instanceof PyBoolean){
-            return Optional.of(asBoolean(o));
+            return Optional.of(((PyBoolean)o).getBooleanValue());
         }
 
         return Optional.empty();
-    }
-
-    private Integer asInteger(Object o) {
-        return ((PyInteger) o).getValue();
-    }
-
-    private String asString(Object o) {
-        return ((PyString) o).getString();
-    }
-
-    private Boolean asBoolean(Object o){
-        return ((PyBoolean)o).getBooleanValue();
     }
 
 }
