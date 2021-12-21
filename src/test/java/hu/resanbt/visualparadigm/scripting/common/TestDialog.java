@@ -1,10 +1,10 @@
-package hu.resanbt.visualparadigm.scripting.ui.handler;
+package hu.resanbt.visualparadigm.scripting.common;
 
 import hu.resanbt.visualparadigm.scripting.ui.ScriptEditorDialog;
 
 import javax.swing.*;
 
-public class DialogExample {
+public class TestDialog {
 
     public static void main(String[] args) {
         SwingUtilities.invokeLater(() -> {

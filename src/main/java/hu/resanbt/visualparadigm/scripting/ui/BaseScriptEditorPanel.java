@@ -60,18 +60,24 @@ public class BaseScriptEditorPanel extends javax.swing.JPanel {
 
         jLabel1.setText("Language:");
 
+        languageComboBox.setName("languageComboBox"); // NOI18N
+
         jLabel2.setText("Script:");
 
         executeButton.setText("Execute");
+        executeButton.setName("executeButton"); // NOI18N
 
         scriptTextArea.setColumns(20);
         scriptTextArea.setRows(5);
+        scriptTextArea.setName("scriptTextArea"); // NOI18N
         scriptTextScrollPane.setViewportView(scriptTextArea);
 
         helpButton.setText("Help");
+        helpButton.setName("helpButton"); // NOI18N
 
         jLabel4.setText("History:");
 
+        historyComboBox.setName("historyComboBox"); // NOI18N
         historyComboBox.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 historyComboBoxActionPerformed(evt);
@@ -79,6 +85,7 @@ public class BaseScriptEditorPanel extends javax.swing.JPanel {
         });
 
         appendToHistoryButton.setText("Append");
+        appendToHistoryButton.setName("appendToHistoryButton"); // NOI18N
 
         javax.swing.GroupLayout scriptPanelLayout = new javax.swing.GroupLayout(scriptPanel);
         scriptPanel.setLayout(scriptPanelLayout);
@@ -141,11 +148,15 @@ public class BaseScriptEditorPanel extends javax.swing.JPanel {
 
             }
         ));
+        outputTable.setName("outputTable"); // NOI18N
         jScrollPane1.setViewportView(outputTable);
 
         jLabel5.setText("Filter:");
 
         exportButton.setText("Export...");
+        exportButton.setName("exportButton"); // NOI18N
+
+        tableFilterTextField.setName("tableFilterTextField"); // NOI18N
 
         javax.swing.GroupLayout tableResultPanelLayout = new javax.swing.GroupLayout(tableResultPanel);
         tableResultPanel.setLayout(tableResultPanelLayout);
@@ -180,6 +191,7 @@ public class BaseScriptEditorPanel extends javax.swing.JPanel {
 
         outputTextArea.setColumns(20);
         outputTextArea.setRows(5);
+        outputTextArea.setName("outputTextArea"); // NOI18N
         jScrollPane2.setViewportView(outputTextArea);
 
         javax.swing.GroupLayout textualResultPanelLayout = new javax.swing.GroupLayout(textualResultPanel);
@@ -237,6 +249,7 @@ public class BaseScriptEditorPanel extends javax.swing.JPanel {
         );
 
         closeButton.setText("Close");
+        closeButton.setName("closeButton"); // NOI18N
 
         javax.swing.GroupLayout bottomPanelLayout = new javax.swing.GroupLayout(bottomPanel);
         bottomPanel.setLayout(bottomPanelLayout);

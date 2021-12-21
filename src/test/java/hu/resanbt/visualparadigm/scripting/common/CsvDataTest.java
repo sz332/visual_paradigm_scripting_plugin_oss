@@ -1,4 +1,4 @@
-package hu.resanbt.visualparadigm.scripting.ui.handler;
+package hu.resanbt.visualparadigm.scripting.common;
 
 import hu.resanbt.visualparadigm.scripting.common.csv.CsvData;
 import hu.resanbt.visualparadigm.scripting.common.result.TabularResult;
@@ -27,6 +27,24 @@ public class CsvDataTest {
         var rawData = csvData.asRawData();
 
         Assert.assertNotNull(rawData);
+    }
+
+    private static class MyClass{
+        private final String id;
+        private final String name;
+
+        public MyClass(String id, String name) {
+            this.id = id;
+            this.name = name;
+        }
+
+        public String getId() {
+            return id;
+        }
+
+        public String getName() {
+            return name;
+        }
     }
 
 }

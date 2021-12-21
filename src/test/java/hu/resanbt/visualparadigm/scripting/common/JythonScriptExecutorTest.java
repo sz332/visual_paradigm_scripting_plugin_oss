@@ -1,4 +1,4 @@
-package hu.resanbt.visualparadigm.scripting.ui.handler;
+package hu.resanbt.visualparadigm.scripting.common;
 
 import hu.resanbt.visualparadigm.scripting.script.JythonScriptExecutor;
 import hu.resanbt.visualparadigm.scripting.script.ScriptExecutionException;
@@ -10,11 +10,7 @@ import java.util.List;
 
 public class JythonScriptExecutorTest {
 
-    public void testHelloWorld() throws ScriptExecutionException {
-       ScriptExecutor executor = new JythonScriptExecutor();
-       executor.execute("print 'hello world'");
-    }
-
+    @Test
     public void testResultAsInt() throws ScriptExecutionException {
         ScriptExecutor executor = new JythonScriptExecutor();
         Object result = executor.execute("result = 23");
@@ -22,6 +18,7 @@ public class JythonScriptExecutorTest {
         Assert.assertEquals(Integer.valueOf(23), result);
     }
 
+    @Test
     public void testResultAsString() throws ScriptExecutionException {
         ScriptExecutor executor = new JythonScriptExecutor();
         Object result = executor.execute("result = 'test'");

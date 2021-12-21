@@ -1,4 +1,4 @@
-package hu.resanbt.visualparadigm.scripting.ui.handler;
+package hu.resanbt.visualparadigm.scripting.common;
 
 import hu.resanbt.visualparadigm.scripting.common.eventbus.Event;
 import hu.resanbt.visualparadigm.scripting.common.eventbus.EventBus;
