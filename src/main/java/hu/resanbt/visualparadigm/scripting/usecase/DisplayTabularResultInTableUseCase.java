@@ -1,7 +1,7 @@
 package hu.resanbt.visualparadigm.scripting.usecase;
 
 import hu.resanbt.visualparadigm.scripting.common.eventbus.EventBus;
-import hu.resanbt.visualparadigm.scripting.common.result.TabularResultTableModel;
+import hu.resanbt.visualparadigm.scripting.common.ui.TabularResultTableModel;
 import hu.resanbt.visualparadigm.scripting.common.usecase.UseCase;
 import hu.resanbt.visualparadigm.scripting.event.ResultGridFocusRequestedEvent;
 import hu.resanbt.visualparadigm.scripting.event.TabularResultCreatedEvent;

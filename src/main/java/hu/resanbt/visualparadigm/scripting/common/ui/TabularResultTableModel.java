@@ -1,6 +1,7 @@
-package hu.resanbt.visualparadigm.scripting.common.result;
+package hu.resanbt.visualparadigm.scripting.common.ui;
 
 import hu.resanbt.visualparadigm.scripting.common.reflection.Bean;
+import hu.resanbt.visualparadigm.scripting.common.result.TabularResult;
 
 import javax.swing.table.AbstractTableModel;
 

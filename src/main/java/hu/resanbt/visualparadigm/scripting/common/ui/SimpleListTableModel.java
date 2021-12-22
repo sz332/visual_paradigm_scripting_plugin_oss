@@ -1,4 +1,4 @@
-package hu.resanbt.visualparadigm.scripting.common.result;
+package hu.resanbt.visualparadigm.scripting.common.ui;
 
 import javax.swing.table.AbstractTableModel;
 import java.util.List;
