@@ -22,7 +22,7 @@ public class DisplaySelectedHistoryRecordInEditorUseCase implements UseCase {
 
     private void onHistoryRecordSelected(HistoryRecordSelectedEvent event) {
 
-        SwingUtilities.invokeLater(()-> {
+        SwingUtilities.invokeLater(() -> {
             comboBox.setSelectedItem(event.getHistoryRecord().getLanguage());
 
             String decodedString = new String(Base64.getDecoder().decode(event.getHistoryRecord().getScript()), StandardCharsets.UTF_8);

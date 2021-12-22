@@ -29,7 +29,7 @@ public class CsvDataTest {
         Assert.assertNotNull(rawData);
     }
 
-    private static class MyClass{
+    private static class MyClass {
         private final String id;
         private final String name;
 

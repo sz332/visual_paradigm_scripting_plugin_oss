@@ -7,7 +7,7 @@ public class ExecutorNotFoundEvent implements Event {
 
     private final ExecutorNotFoundException exception;
 
-    public ExecutorNotFoundEvent(ExecutorNotFoundException exception){
+    public ExecutorNotFoundEvent(ExecutorNotFoundException exception) {
         this.exception = exception;
     }
 

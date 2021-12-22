@@ -71,7 +71,7 @@ public class ScriptEditorPanel extends BaseScriptEditorPanel {
 
         this.scriptTextScrollPane.setLineNumbersEnabled(true);
 
-        for (var executor : this.executors){
+        for (var executor : this.executors) {
             this.languageComboBox.addItem(executor.getLanguage());
         }
 
@@ -115,7 +115,7 @@ public class ScriptEditorPanel extends BaseScriptEditorPanel {
 
     @OnEventDispatcherThread
     private void executeScriptCommand(ActionEvent e) {
-        eventBus.publish(new ScriptExecutionRequestedEvent(languageComboBox.getSelectedItem().toString(),scriptTextArea.getText()));
+        eventBus.publish(new ScriptExecutionRequestedEvent(languageComboBox.getSelectedItem().toString(), scriptTextArea.getText()));
     }
 
     @OnEventDispatcherThread

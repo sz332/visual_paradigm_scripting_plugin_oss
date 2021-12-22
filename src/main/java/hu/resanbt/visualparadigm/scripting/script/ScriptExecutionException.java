@@ -5,6 +5,8 @@ import java.io.StringWriter;
 
 public class ScriptExecutionException extends Exception {
 
+    public static final int MISSING_LINE = -1;
+
     private final int line;
 
     public ScriptExecutionException(Exception e, int line) {

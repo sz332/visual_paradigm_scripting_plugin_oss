@@ -5,29 +5,29 @@ import hu.resanbt.visualparadigm.scripting.common.reflection.Bean;
 import javax.swing.table.AbstractTableModel;
 
 @SuppressWarnings("squid:S1948")
-public class SmartTableModel extends AbstractTableModel {
+public class TabularResultTableModel extends AbstractTableModel {
 
-    private final TabularResult grid;
+    private final TabularResult result;
 
-    public SmartTableModel(TabularResult grid) {
+    public TabularResultTableModel(TabularResult result) {
         super();
-        this.grid = grid;
+        this.result = result;
     }
 
     @Override
     public int getRowCount() {
-        return grid.getList().size();
+        return result.getList().size();
     }
 
     @Override
     public int getColumnCount() {
-        return grid.getFields().size();
+        return result.getFields().size();
     }
 
     @Override
     public String getColumnName(int column) {
-        String field = grid.getFields().keySet().toArray(new String[0])[column];
-        return grid.getFields().get(field);
+        String field = result.getFields().keySet().toArray(new String[0])[column];
+        return result.getFields().get(field);
     }
 
     @Override
@@ -43,9 +43,9 @@ public class SmartTableModel extends AbstractTableModel {
 
     @Override
     public Object getValueAt(int rowIndex, int columnIndex) {
-        String field = grid.getFields().keySet().toArray(new String[0])[columnIndex];
-        Object object = grid.getList().get(rowIndex);
-        return Bean.of(object).propertyOrEmptyString(field);
+        String field = result.getFields().keySet().toArray(new String[0])[columnIndex];
+        Object object = result.getList().get(rowIndex);
+        return result.getPropertyReader().getPropertyOrEmptyStringByName(object, field );
     }
 
 }

@@ -11,24 +11,24 @@ import java.util.stream.Stream;
 @SuppressWarnings("squid:S3878")
 public class CsvData {
 
-    private final TabularResult grid;
+    private final TabularResult result;
 
-    public CsvData(TabularResult grid) {
-        this.grid = grid;
+    public CsvData(TabularResult result) {
+        this.result = result;
     }
 
     public List<String[]> asRawData() {
         var headerStream = Arrays.asList(
-                new String[][]{grid.getFields().values().toArray(String[]::new)}
+                new String[][]{result.getFields().values().toArray(String[]::new)}
         ).stream();
 
         var dataStream =
-                grid.getList().stream()
+                result.getList().stream()
                         .map(obj ->
-                                grid.getFields()
+                                result.getFields()
                                         .keySet()
                                         .stream()
-                                        .map(k -> Bean.of(obj).propertyAsString(k))
+                                        .map(k -> result.getPropertyReader().getPropertyNameAsString(obj,k))
                                         .toArray(String[]::new));
 
         return Stream.concat(headerStream, dataStream).collect(Collectors.toList());

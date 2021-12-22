@@ -27,13 +27,13 @@ public class JythonScriptExecutorTest {
     }
 
     @Test
-    public void testResultAsIntList() throws  ScriptExecutionException {
+    public void testResultAsIntList() throws ScriptExecutionException {
         ScriptExecutor executor = new JythonScriptExecutor();
         Object result = executor.execute("result = [1,2,3,4]");
 
         Assert.assertTrue(result instanceof List);
-        Assert.assertEquals(4, ((List)result).size());
-        Assert.assertArrayEquals(new Integer[]{1,2,3,4}, (((List)result)).toArray(new Integer[0]));
+        Assert.assertEquals(4, ((List) result).size());
+        Assert.assertArrayEquals(new Integer[]{1, 2, 3, 4}, (((List) result)).toArray(new Integer[0]));
     }
 
 }

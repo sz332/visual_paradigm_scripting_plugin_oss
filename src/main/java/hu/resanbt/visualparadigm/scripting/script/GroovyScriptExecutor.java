@@ -4,11 +4,6 @@ import com.vp.plugin.ApplicationManager;
 import groovy.lang.Binding;
 import groovy.lang.GroovyShell;
 import hu.resanbt.visualparadigm.scripting.vp.ModelHelper;
-import org.codehaus.groovy.control.MultipleCompilationErrorsException;
-
-import java.util.Arrays;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 public class GroovyScriptExecutor implements ScriptExecutor {
 

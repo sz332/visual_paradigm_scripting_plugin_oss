@@ -50,7 +50,7 @@ public class ExecuteSelectedScriptUseCase implements UseCase {
 
         } catch (ScriptExecutionException e) {
             eventBus.publish(new ScriptExecutionFailedEvent(e));
-        } catch (ExecutorNotFoundException e){
+        } catch (ExecutorNotFoundException e) {
             eventBus.publish(new ExecutorNotFoundEvent(e));
         } catch (Exception e) {
             eventBus.publish(new ExceptionOccurredEvent(e));

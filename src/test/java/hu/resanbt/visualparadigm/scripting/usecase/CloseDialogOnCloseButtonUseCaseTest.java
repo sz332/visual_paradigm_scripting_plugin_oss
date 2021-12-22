@@ -1,6 +1,7 @@
 package hu.resanbt.visualparadigm.scripting.usecase;
 
 //import com.athaydes.automaton.Swinger;
+
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;

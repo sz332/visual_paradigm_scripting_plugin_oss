@@ -26,8 +26,8 @@ public class SelectErroneousLineInEditorUseCase implements UseCase {
             try {
                 int line = event.getLine();
 
-                if (line >= 0) {
-                    textArea.setCaretPosition(textArea.getLineStartOffset(line));
+                if (line > 0) {
+                    textArea.setCaretPosition(textArea.getLineStartOffset(line - 1));
                     textArea.requestFocus();
                 }
             } catch (BadLocationException e) {
