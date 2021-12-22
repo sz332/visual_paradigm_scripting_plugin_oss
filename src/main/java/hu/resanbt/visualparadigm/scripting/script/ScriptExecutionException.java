@@ -19,7 +19,7 @@ public class ScriptExecutionException extends Exception {
         PrintWriter pw = new PrintWriter(sw);
         printStackTrace(pw);
 
-        return sw.toString() + "\n" + "on line = " + this.getLine();
+        return sw + "\n" + "on line = " + this.getLine();
     }
 
     public int getLine() {

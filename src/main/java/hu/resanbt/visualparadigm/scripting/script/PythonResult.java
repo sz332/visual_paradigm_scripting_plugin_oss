@@ -2,10 +2,15 @@ package hu.resanbt.visualparadigm.scripting.script;
 
 import hu.resanbt.visualparadigm.scripting.common.result.ListResult;
 import hu.resanbt.visualparadigm.scripting.common.result.TabularResult;
+import hu.resanbt.visualparadigm.scripting.common.result.TabularResultPropertyReader;
 import org.python.core.*;
 
 import java.util.*;
 
+/**
+ * FIXME this class has a nice interface but a not very nice implementation. The implementation
+ * shall be cleaned up.
+ */
 public class PythonResult {
 
     private final PyObject pyObject;
@@ -99,5 +104,25 @@ public class PythonResult {
 
         return Optional.empty();
     }
+
+    private static class MapTabularResultPropertyReader implements TabularResultPropertyReader {
+
+        @Override
+        public Object getPropertyByName(Object object, String name) {
+            return object instanceof Map ? ((Map) object).get(name) : null;
+        }
+
+        @Override
+        public Object getPropertyOrEmptyStringByName(Object object, String name) {
+            Object result = getPropertyByName(object, name);
+            return result == null ? "" : result;
+        }
+
+        @Override
+        public String getPropertyNameAsString(Object object, String propertyName) {
+            return getPropertyOrEmptyStringByName(object, propertyName).toString();
+        }
+    }
+
 
 }
