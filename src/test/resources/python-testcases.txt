@@ -86,7 +86,7 @@ Test case:
 ---------------
 
 Name:
-    In case of syntactically erroneous script the line causing the error is selected
+    In case of syntactically erroneous script the line causing the error is selected in the editor
 Test case:
     Actions:
         Set language to python
