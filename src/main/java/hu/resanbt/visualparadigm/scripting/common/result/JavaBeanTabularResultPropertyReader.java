@@ -2,7 +2,7 @@ package hu.resanbt.visualparadigm.scripting.common.result;
 
 import hu.resanbt.visualparadigm.scripting.common.reflection.Bean;
 
-public class JavaBeanTabularResultPropertyReader implements TabularResultPropertyReader{
+public class JavaBeanTabularResultPropertyReader implements TabularResultPropertyReader {
 
     @Override
     public Object getPropertyByName(Object object, String propertyName) {

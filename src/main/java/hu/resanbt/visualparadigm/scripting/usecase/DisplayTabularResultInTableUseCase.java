@@ -25,7 +25,7 @@ public class DisplayTabularResultInTableUseCase implements UseCase {
 
         SwingUtilities.invokeLater(() -> {
             this.table.setRowSorter(null);
-            TabularResultTableModel model = new TabularResultTableModel(event.getSmartGridResult());
+            var model = new TabularResultTableModel(event.getTabularResult());
             this.table.setModel(model);
             model.fireTableDataChanged();
         });

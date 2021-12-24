@@ -26,15 +26,15 @@ public class ExecuteSelectedScriptUseCase implements UseCase {
     private void onScriptExecutionRequested(ScriptExecutionRequestedEvent event) {
         try {
 
-            String language = event.getLanguage();
+            var language = event.getLanguage();
 
-            ScriptExecutor executor = executors
+            var executor = executors
                     .stream()
                     .filter(e -> e.getLanguage().equals(event.getLanguage()))
                     .findFirst()
                     .orElseThrow(ExecutorNotFoundException::new);
 
-            Object value = executor.execute(event.getScript());
+            var value = executor.execute(event.getScript());
 
             if (value == null) {
                 eventBus.publish(new EmptyResultCreatedEvent());

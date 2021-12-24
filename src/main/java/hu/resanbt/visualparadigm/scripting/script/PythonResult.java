@@ -15,7 +15,7 @@ public class PythonResult {
 
     private final PyObject pyObject;
 
-    public PythonResult(PyObject pyObject){
+    public PythonResult(PyObject pyObject) {
         this.pyObject = pyObject;
     }
 

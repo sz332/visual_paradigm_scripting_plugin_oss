@@ -17,7 +17,7 @@ public class CsvExportUseCase implements UseCase {
 
     private final EventBus eventBus;
 
-    private Optional<TabularResult> smartGridResult = Optional.empty();
+    private Optional<TabularResult> result = Optional.empty();
 
     public CsvExportUseCase(EventBus eventBus) {
         this.eventBus = eventBus;
@@ -26,11 +26,11 @@ public class CsvExportUseCase implements UseCase {
     }
 
     public void onSmartGridResultCreated(TabularResultCreatedEvent event) {
-        this.smartGridResult = Optional.of(event.getSmartGridResult());
+        this.result = Optional.of(event.getTabularResult());
     }
 
     public void onExportFileSelect(ExportFileSelectedEvent event) {
-        smartGridResult.ifPresent(result -> {
+        result.ifPresent(result -> {
             try (var writer = new CSVWriterBuilder(new FileWriter(event.getFile())).withSeparator(';').build()) {
                 var data = new CsvData(result).asRawData();
                 writer.writeAll(data);

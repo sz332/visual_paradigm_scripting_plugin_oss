@@ -10,6 +10,7 @@ public class EventBus {
 
     private final Map<Class<? extends Event>, Set<EventHandler<? extends Event>>> subscriptions = new ConcurrentHashMap<>();
 
+    @SuppressWarnings("unchecked")
     public void publish(Event event) {
         for (var entry : subscriptions.entrySet()) {
             if (entry.getKey().equals(event.getClass())) {

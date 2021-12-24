@@ -1,6 +1,5 @@
 package hu.resanbt.visualparadigm.scripting.common.ui;
 
-import hu.resanbt.visualparadigm.scripting.common.reflection.Bean;
 import hu.resanbt.visualparadigm.scripting.common.result.TabularResult;
 
 import javax.swing.table.AbstractTableModel;
@@ -46,7 +45,7 @@ public class TabularResultTableModel extends AbstractTableModel {
     public Object getValueAt(int rowIndex, int columnIndex) {
         String field = result.getFields().keySet().toArray(new String[0])[columnIndex];
         Object object = result.getList().get(rowIndex);
-        return result.getPropertyReader().getPropertyOrEmptyStringByName(object, field );
+        return result.getPropertyReader().getPropertyOrEmptyStringByName(object, field);
     }
 
 }

@@ -68,8 +68,8 @@ public class CastedList {
         }
 
         if (obj instanceof Iterable) {
-            List<Object> retValue = new ArrayList<>();
-            Iterable<Object> iterable = (Iterable<Object>) obj;
+            @SuppressWarnings("unchecked") var iterable = (Iterable<Object>) obj;
+            var retValue = new ArrayList<>();
             iterable.forEach(retValue::add);
             return retValue;
         }

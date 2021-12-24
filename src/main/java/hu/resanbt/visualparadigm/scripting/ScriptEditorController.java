@@ -13,12 +13,12 @@ public class ScriptEditorController implements VPActionController {
 
     @Override
     public void performAction(VPAction vpAction) {
-        ViewManager viewManager = ApplicationManager.instance().getViewManager();
-        Component parentFrame = viewManager.getRootFrame();
+        var viewManager = ApplicationManager.instance().getViewManager();
+        var parentFrame = viewManager.getRootFrame();
 
-        JFrame rootFrame = (JFrame) SwingUtilities.getRoot(parentFrame);
+        var rootFrame = (JFrame) SwingUtilities.getRoot(parentFrame);
 
-        ScriptEditorDialog dialog = new ScriptEditorDialog(rootFrame);
+        var dialog = new ScriptEditorDialog(rootFrame);
         dialog.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
         dialog.setLocationRelativeTo(rootFrame);
 

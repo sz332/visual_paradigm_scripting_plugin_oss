@@ -62,6 +62,7 @@ public class ScriptEditorPanel extends BaseScriptEditorPanel {
         eventBus.publish(new DialogDisplayedEvent());
     }
 
+    @SuppressWarnings("unchecked")
     @OnEventDispatcherThread
     private void updateComponents() {
 

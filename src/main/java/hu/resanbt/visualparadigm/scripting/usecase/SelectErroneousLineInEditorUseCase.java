@@ -24,12 +24,13 @@ public class SelectErroneousLineInEditorUseCase implements UseCase {
         SwingUtilities.invokeLater(() -> {
 
             try {
-                int line = event.getLine();
 
-                if (line > 0) {
+                if (event.hasValidLine()) {
+                    var line = event.getLine();
                     textArea.setCaretPosition(textArea.getLineStartOffset(line - 1));
                     textArea.requestFocus();
                 }
+
             } catch (BadLocationException e) {
                 eventBus.publish(new ExceptionOccurredEvent(e));
             }

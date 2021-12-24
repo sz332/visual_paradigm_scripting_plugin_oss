@@ -1,0 +1,103 @@
+=====================
+Python
+=====================
+
+Name:
+    Entering a simple expression results in textual result area displaying the result of the expression
+Test case:
+    Actions:
+        Set language to python
+        Enter in editor::
+            result = 1 + 1
+        Press Execute button
+
+    Expected results:
+        Textual result is focused on
+        Textual result contains: 2
+
+---------------
+Name:
+    Entering a list expression results in tabular result area displaying the list
+Test case:
+    Actions:
+        Set Language to python
+        Enter in editor:
+            result = [1,2,3,4,5]
+        Press Execute button
+    Expected results:
+        Table result is focused on
+        Table result contains:
+            Column name: Result
+            Values: 1,2,3,4
+
+---------------
+Name:
+    Using the model_helper as_list_result functionality results in tabular result area displaying the list
+Test case:
+    Actions:
+        Set Language to python
+        Enter in editor:
+            result = model_helper.asListResult([5,6,7])
+        Press Execute button
+    Expected result:
+        Table result is focused on
+        Table result contains:
+            Column name: Result
+            Values: 5,6,7
+
+---------------
+Name:
+    Using the model_helper as_tabular_result functionality results in tabular result area displaying the tabular result
+Test case:
+    Actions:
+        Set language to python
+        Enter in editor:
+            from java.util import LinkedHashMap
+
+            class Data:
+
+                def __init__(self, id, name):
+                    self.id = id
+                    self.name = name
+
+            z = LinkedHashMap()
+            z.put('id', 'Id')
+            z.put('name', 'Name')
+
+            list = []
+
+            list.append(Data(1, 'Apple'))
+            list.append(Data(2, 'Bear'))
+            list.append(Data(3, 'Cat'))
+            list.append(Data(4, 'Catfish'))
+
+            result = model_helper.asTabularResult(list, z)
+        Press Execute button
+    Expected result:
+        Table result is focused on
+        Table result contains:
+            Columns name: Id, Name
+            Values:
+                1, Apple
+                2, Bear
+                3, Cat
+                4, Catfish
+
+---------------
+
+Name:
+    In case of syntactically erroneous script the line causing the error is selected
+Test case:
+    Actions:
+        Set language to python
+        Enter in editor:
+            test()
+            # empty line
+            result = 3
+        Go to line 3
+        Press Execute button
+    Expected result:
+        Textual result is focused on
+        Textual result contains
+            NameError: name 'test' is not defined
+        Line 1 is selected in editor

@@ -13,7 +13,7 @@ public class TabularResult {
         this(list, fields, new JavaBeanTabularResultPropertyReader());
     }
 
-    public TabularResult(List<Object> list, Map<String, String> fields, TabularResultPropertyReader propertyReader){
+    public TabularResult(List<Object> list, Map<String, String> fields, TabularResultPropertyReader propertyReader) {
         this.list = list;
         this.fields = fields;
         this.propertyReader = propertyReader;

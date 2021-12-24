@@ -24,14 +24,17 @@ public class RefreshHistoryOnHistoryChangeUseCase implements UseCase {
         eventBus.subscribe(HistoryChangedEvent.class, this::onHistoryChanged);
     }
 
+    @SuppressWarnings("unchecked")
     private void onHistoryChanged(HistoryChangedEvent event) {
-        try {
-            List<HistoryRecord> log = historyLog.read();
-            var model = new DefaultComboBoxModel<>(log.toArray(HistoryRecord[]::new));
-            this.comboBox.setModel(model);
-        } catch (Exception e) {
-            eventBus.publish(new ExceptionOccurredEvent(e));
-        }
+        SwingUtilities.invokeLater(() -> {
+            try {
+                var log = historyLog.read();
+                var model = new DefaultComboBoxModel<>(log.toArray(HistoryRecord[]::new));
+                this.comboBox.setModel(model);
+            } catch (Exception e) {
+                eventBus.publish(new ExceptionOccurredEvent(e));
+            }
+        });
     }
 
 }

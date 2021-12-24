@@ -11,7 +11,7 @@ public class TabularResultCreatedEvent implements Event {
         this.result = result;
     }
 
-    public TabularResult getSmartGridResult() {
+    public TabularResult getTabularResult() {
         return result;
     }
 

@@ -16,9 +16,7 @@ public class ScriptEditorDialog extends JDialog {
         this.eventBus = new EventBus();
         eventBus.subscribe(CloseDialogRequestedEvent.class, this::closeDialogRequested);
 
-        ScriptEditorPanel scriptEditorPanel = new ScriptEditorPanel(eventBus);
-
-        this.setContentPane(scriptEditorPanel);
+        this.setContentPane(new ScriptEditorPanel(eventBus));
         this.pack();
     }
 

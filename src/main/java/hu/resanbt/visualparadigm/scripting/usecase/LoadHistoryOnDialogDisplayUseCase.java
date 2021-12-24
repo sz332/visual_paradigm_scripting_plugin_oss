@@ -24,14 +24,18 @@ public class LoadHistoryOnDialogDisplayUseCase implements UseCase {
         eventBus.subscribe(DialogDisplayedEvent.class, this::onDialogDisplayed);
     }
 
+    @SuppressWarnings("unchecked")
     private void onDialogDisplayed(DialogDisplayedEvent event) {
-        try {
-            List<HistoryRecord> log = historyLog.read();
-            var model = new DefaultComboBoxModel<>(log.toArray(HistoryRecord[]::new));
-            this.comboBox.setModel(model);
-        } catch (Exception e) {
-            eventBus.publish(new ExceptionOccurredEvent(e));
-        }
+
+        SwingUtilities.invokeLater(() -> {
+            try {
+                var log = historyLog.read();
+                var model = new DefaultComboBoxModel<>(log.toArray(HistoryRecord[]::new));
+                this.comboBox.setModel(model);
+            } catch (Exception e) {
+                eventBus.publish(new ExceptionOccurredEvent(e));
+            }
+        });
     }
 
 }

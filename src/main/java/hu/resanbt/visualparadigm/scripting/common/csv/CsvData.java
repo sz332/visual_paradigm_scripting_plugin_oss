@@ -1,6 +1,5 @@
 package hu.resanbt.visualparadigm.scripting.common.csv;
 
-import hu.resanbt.visualparadigm.scripting.common.reflection.Bean;
 import hu.resanbt.visualparadigm.scripting.common.result.TabularResult;
 
 import java.util.Arrays;
@@ -28,7 +27,7 @@ public class CsvData {
                                 result.getFields()
                                         .keySet()
                                         .stream()
-                                        .map(k -> result.getPropertyReader().getPropertyNameAsString(obj,k))
+                                        .map(k -> result.getPropertyReader().getPropertyNameAsString(obj, k))
                                         .toArray(String[]::new));
 
         return Stream.concat(headerStream, dataStream).collect(Collectors.toList());
