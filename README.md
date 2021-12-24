@@ -6,7 +6,9 @@ This repository contains an open source scripting plugin for Visual Paradigm (ht
 
 ![image](https://user-images.githubusercontent.com/8182138/146509410-f6ea8cf3-055f-42e8-8e0f-e862e79c187a.png)
 
-* Groovy language support
+* Multiple language support:
+  * Groovy
+  * Python (jython 2.7.2)
 * Display result in text area
 * Display result in grid
 * Export grid result as CSV file
@@ -50,6 +52,7 @@ Stop Visual Paradigm, go to the location, and simply remove the `scripting-<vers
 
 * [General usage](docs/general.md)
 * [Groovy scripting](docs/groovy.md)
+* [Python scripting](docs/jython.md)
 
 # Building
 

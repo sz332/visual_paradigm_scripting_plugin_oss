@@ -1,5 +1,8 @@
 package hu.resanbt.visualparadigm.scripting.script;
 
+import com.vp.plugin.model.IModelElement;
+import hu.resanbt.visualparadigm.scripting.common.logging.Logger;
+import hu.resanbt.visualparadigm.scripting.common.reflection.Bean;
 import hu.resanbt.visualparadigm.scripting.common.result.ListResult;
 import hu.resanbt.visualparadigm.scripting.common.result.TabularResult;
 import hu.resanbt.visualparadigm.scripting.common.result.TabularResultPropertyReader;
@@ -46,6 +49,7 @@ public class PythonResult {
         }
 
         if (pythonResult instanceof TabularResult) {
+            Logger.log("Result was type of tabularResult");
             var tabularResult = (TabularResult) pythonResult;
             return new TabularResult(tabularResultToJava(tabularResult), tabularResult.getFields(), new MapTabularResultPropertyReader());
         }
@@ -59,20 +63,40 @@ public class PythonResult {
         for (var entry : result.getList()) {
             if (entry instanceof PyInstance) {
                 list.add(convertPythonObjectToMap((PyInstance) entry, result.getFields()));
+            } else if (entry instanceof IModelElement){
+                list.add(convertVPObjectToMap(entry, result.getFields()));
+            } else {
+                Logger.log("Object was neither PyInstance, nor IModelElement but " + entry.getClass() + ", skipping...");
             }
         }
 
         return list;
     }
 
-    private Object convertPythonObjectToMap(PyInstance instance, Map<String, String> fields) {
+    private Object convertVPObjectToMap(Object instance, Map<String, String> fields){
 
+        var properties = new HashMap<String, Object>();
+
+        Bean bean = Bean.of(instance);
+
+        for (String key : fields.keySet()) {
+            properties.put(key, bean.propertyOrEmptyString(key));
+        }
+
+        Logger.log("VP Object converted to map = " + properties);
+
+        return properties;
+    }
+
+    private Object convertPythonObjectToMap(PyInstance instance, Map<String, String> fields) {
         var properties = new HashMap<String, Object>();
 
         for (String key : fields.keySet()) {
             var pyObject = instance.__findattr_ex__(key);
             properties.put(key, pythonBaseTypeToJava(pyObject).orElse("<unknown type>"));
         }
+
+        Logger.log("Py instance converted to map = " + properties);
 
         return properties;
     }

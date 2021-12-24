@@ -1,6 +1,6 @@
 # Overview
 
-The following document describes the basic functionalities of the scripting plugin.
+The following document the Groovy language support provided by the plugin.
 
 # What is Groovy?
 
