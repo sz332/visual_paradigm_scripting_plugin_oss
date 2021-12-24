@@ -8,7 +8,7 @@ This repository contains an open source scripting plugin for Visual Paradigm (ht
 
 * Multiple language support:
   * Groovy
-  * Python (jython 2.7.2)
+  * Python (via Jython 2.7.2)
 * Display result in text area
 * Display result in grid
 * Export grid result as CSV file
