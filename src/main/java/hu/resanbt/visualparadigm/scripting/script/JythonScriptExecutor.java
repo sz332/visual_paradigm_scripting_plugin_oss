@@ -14,21 +14,26 @@ public class JythonScriptExecutor implements ScriptExecutor {
     }
 
     @Override
-    public Object execute(String script) throws ScriptExecutionException {
+    public ScriptExecutionResult execute(String script) throws ScriptExecutionException {
 
         var errorStream = new StringWriter();
 
         try {
-            PythonInterpreter interpreter = new PythonInterpreter();
+
+            var logger = new ScriptLogger();
+
+            var interpreter = new PythonInterpreter();
 
             interpreter.set("app_manager", ApplicationManager.instance());
             interpreter.set("model_helper", new ModelHelper());
+            interpreter.set("logger", logger);
             interpreter.setErr(errorStream);
             interpreter.exec(script);
 
-            var result = interpreter.get("result");
+            var evaluationResult = interpreter.get("result");
+            var evaluationResultAsJava = new PythonResult(evaluationResult).asJava();
 
-            return new PythonResult(result).asJava();
+            return new ScriptExecutionResult(evaluationResultAsJava, logger.getLog());
 
         } catch (Exception e) {
             throw new JythonScriptExecutionException(e);

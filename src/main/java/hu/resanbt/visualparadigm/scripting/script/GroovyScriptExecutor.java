@@ -13,15 +13,19 @@ public class GroovyScriptExecutor implements ScriptExecutor {
     }
 
     @Override
-    public Object execute(String script) throws ScriptExecutionException {
+    public ScriptExecutionResult execute(String script) throws ScriptExecutionException {
+
+        var logger = new ScriptLogger();
 
         var binding = new Binding();
         binding.setVariable("appManager", ApplicationManager.instance());
         binding.setVariable("modelHelper", new ModelHelper());
+        binding.setVariable("logger", logger);
         var shell = new GroovyShell(binding);
 
         try {
-            return shell.evaluate(script);
+            var evaluationResult = shell.evaluate(script);
+            return new ScriptExecutionResult(evaluationResult, logger.getLog());
         } catch (Exception ex) {
             throw new GroovyScriptExecutionException(ex);
         }

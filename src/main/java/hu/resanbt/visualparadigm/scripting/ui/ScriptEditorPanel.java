@@ -48,6 +48,7 @@ public class ScriptEditorPanel extends BaseScriptEditorPanel {
                 new DisplayExceptionInOutputTextAreaUseCase(eventBus, this.outputTextArea),
                 new DisplayListResultInTableUseCase(eventBus, this.outputTable),
                 new DisplayScriptExecutionFailedInOutputTextAreaUseCase(eventBus, this.outputTextArea),
+                new DisplayScriptLogUseCase(eventBus, this.logTextArea),
                 new DisplaySelectedHistoryRecordInEditorUseCase(eventBus, this.languageComboBox, this.scriptTextArea),
                 new DisplayTabularResultInTableUseCase(eventBus, this.outputTable),
                 new DisplayStringResultInOutputTextAreaUseCase(eventBus, this.outputTextArea),

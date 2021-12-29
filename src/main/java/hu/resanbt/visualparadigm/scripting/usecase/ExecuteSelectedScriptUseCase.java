@@ -34,18 +34,24 @@ public class ExecuteSelectedScriptUseCase implements UseCase {
                     .findFirst()
                     .orElseThrow(ExecutorNotFoundException::new);
 
-            var value = executor.execute(event.getScript());
+            var executionResult = executor.execute(event.getScript());
 
-            if (value == null) {
+            var result = executionResult.getResult();
+
+            if (result == null) {
                 eventBus.publish(new EmptyResultCreatedEvent());
-            } else if (value instanceof ListResult) {
-                eventBus.publish(new ListResultCreatedEvent(((ListResult) value).asList()));
-            } else if (value instanceof TabularResult) {
-                eventBus.publish(new TabularResultCreatedEvent((TabularResult) value));
-            } else if (value instanceof Iterable || isArray(value)) {
-                CastedList.of(value).ifPresent(list -> eventBus.publish(new ListResultCreatedEvent(list.asList())));
+            } else if (result instanceof ListResult) {
+                eventBus.publish(new ListResultCreatedEvent(((ListResult) result).asList()));
+            } else if (result instanceof TabularResult) {
+                eventBus.publish(new TabularResultCreatedEvent((TabularResult) result));
+            } else if (result instanceof Iterable || isArray(result)) {
+                CastedList.of(result).ifPresent(list -> eventBus.publish(new ListResultCreatedEvent(list.asList())));
             } else {
-                eventBus.publish(new StringResultCreatedEvent(value.toString()));
+                eventBus.publish(new StringResultCreatedEvent(result.toString()));
+            }
+
+            if (!executionResult.getLog().isEmpty()) {
+                eventBus.publish(new ScriptLogCreatedEvent(executionResult.getLog()));
             }
 
         } catch (ScriptExecutionException e) {
