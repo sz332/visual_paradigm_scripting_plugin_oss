@@ -17,6 +17,7 @@ This repository contains an open source scripting plugin for Visual Paradigm (ht
 * Jump to line in case of error
 * History support
 * Filter result
+* 
 
 # Commercial support
 
